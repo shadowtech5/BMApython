@@ -1,0 +1,286 @@
+.logo-container{
+	padding: 0;
+}
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {
+	height: 550px
+}
+
+.sidenav{
+	height: 100%;
+}
+
+#available_form{
+  font-family: raleway;
+  font-size: 18px;
+}
+
+.form-container{
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.form-container form .form-control{
+	margin-bottom: 20px;
+	height: 49px;
+
+.google{
+	width: 46px;
+    height: 44px;
+    background: url(../img/social.png) 0 0;
+}
+
+.img img{
+	width: 150px;
+}
+.img{
+	overflow: hidden;
+	height: 150px;
+	padding-bottom: 10px;
+}
+
+.anchor-container{
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	width: 42%;
+	margin-left: 50px;
+}
+
+.anchor-new-row{
+	margin-bottom: 25px;
+}
+
+.anchor-main-container{
+	padding-top: 25px;
+	padding-left: 25px;
+}
+
+.anchor-container .btn-default{
+	background-color: #b30000;
+	color: #fff;
+}
+
+.anchor-star{
+	color: #ffad33;
+}
+
+.anchor-image{
+	float: left;
+	margin-right: 25px;
+}
+
+footer {
+  background-color: #f2f2f2;
+  padding: 25px;
+}
+.jumbotron{
+  margin-bottom: 0;
+}
+
+/* Set gray background color and 100% height */
+.sidenav {
+  background-color: #eee;
+  height: 100% !important;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-left: 2%;
+  padding-right: 1%;
+}
+
+
+
+
+
+
+/*complete profile*/
+body{
+          overflow-x: hidden;
+        }
+        .ui-widget-header{
+          background: #b30000;
+        }
+        .profile-details-container
+        {
+          margin-top: 10px;
+        }
+        .profile-details-container nav{
+          background-color: #fff;
+          /*color: #000;*/
+          border-style: none;
+        }
+
+        .profile-details-container .navbar-inverse .navbar-nav>li>a {
+        color: #333;
+        }
+
+        .title-part{
+          background-color: #d71c26;
+          color:#fff;
+          padding: 0;
+          height: 50px;
+          padding-top: 5px;
+          border-radius: 15px 15px 0 0;
+        }
+
+        .biography-details p {
+          /*background: #f9f9f9;*/
+          /*border-left: 10px solid #ccc;*/
+          margin: 1.5em 10px;
+          padding: 0.5em 10px;
+          quotes: "\201C""\201D""\2018""\2019";
+        }
+
+        .biography-details p:before {
+          /*color: #ccc;*/
+          color: #333;
+          content: open-quote;
+          font-size: 4em;
+          line-height: 0.1em;
+          margin-right: 0.25em;
+          vertical-align: -0.4em;
+        }
+
+        .title-part h4{
+          margin-bottom: 0;
+        }
+
+        .biography-details{
+          width: 50%;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .discription-part{
+          background-color: #333;
+          color: #fff;
+          padding: 0;
+          height: 150px;
+          padding-top: 20px;
+          border-radius: 0 0 15px 15px;
+        }
+        .discription-part ul li{
+          list-style: none;
+          padding: 0;
+        }
+
+        .discription-part ul{
+          padding: 0;
+        }
+
+        .options{
+          margin-bottom: 25px;
+        }
+
+        .booking-info{
+          margin-top: 20px;
+          display: none;
+        }
+        .biography{
+          font-size: 18px;
+          /*margin-top: 200px;*/
+          display: none;
+        }
+        .actor-images{
+          height: 200px;
+          overflow: hidden;
+        }
+        .actor-images>img{
+          margin-left: 120px !important;
+        }        
+
+        .actived{
+          /*border-top: 3px solid #d71c26 !important; */
+          border-top: 3px solid #fff !important;
+        }
+        .photos{
+          padding-top: 100px;
+          margin-bottom: 200px;
+          display: none;
+        }
+        .photos div div{
+          margin-bottom: 20px;
+        }
+        .profile-dp{
+          height: 150px;
+          overflow: hidden;
+          width: 150px;
+          border-radius: 50%;
+          margin-top: 150px;
+          margin-left: 50px;
+          float: left;
+        }
+        .profile-dp-container{
+        	color: #fff;
+        	position: absolute;
+        }
+
+        .profile-dp-container h4{
+        	margin-left: 100px;
+        }
+
+/*end complete profile*/
+
+
+
+
+.main-container{
+	/*background-image: url('../img/main_background.jpg');*/
+	/*background-image: url('../img/maxresdefault (1).jpg');*/
+  background-image: url('../img/poster 2.jpg');
+	background-repeat: no-repeat;
+	min-height: 100%;
+	background-size: cover;
+	margin: 0;
+	min-width: 100%;
+	position: fixed;
+}
+
+.icon-container{
+	position: relative;
+}
+
+.icons{
+  border-radius: 50%;
+	overflow: hidden;
+	background-color: #fff;
+	opacity: 0.7;
+	font-weight: 900;
+	border: 3px solid #333;
+}
+
+.content-container{
+	position: relative;
+	padding-top: 20%;
+	padding-bottom: 18%;
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
+.content-container h2{
+	background-color: #fff;
+	opacity: 0.7;
+
+}
+.icon-container a:hover .icons{
+	background-color: #fff;
+	/*opacity: 0.7;*/
+	opacity: 1;
+}
+
+.icon-container a{
+	color: #333;
+}
+
+
+
+
+
+    
+/* On small screens, set height to 'auto' for the grid */
+@media screen and (max-width: 767px) {
+  .row.content {height: auto;}
+}
+.navbar{
+  margin-bottom: 0;
+}

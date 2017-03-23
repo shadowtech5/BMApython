@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block main_content %}
+<div class="container-fluid user-details-container">
+    <!-- photo container -->
+    <div class="col-md-6">
+        <!-- name container -->
+        <div class="col-md-12 user-name-container">
+            <span>{{user_profile.user.first_name}} {{user_profile.user.last_name}}</span>
+        </div>
+        <!-- ends name container -->
+        <!-- anchor profile image -->
+        <div class="col-md-12">
+            <img src="{% static "" %}{{user_profile.image_path}}main.jpg" class="img-responsive">
+        </div>
+        <!-- ends anchor profile image -->
+    </div>
+    <div class="col-md-6 view-profile-user-deails">
+        <div class="col-lg-12 col-lg-offset-2" style="padding-top: 28px; margin-left: 2px;">
+            <span class="customer-details">Customer Details</span>
+            <div class="book-now-style">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <label>Firstname *</label>
+                    </div>
+                    <div class="col-md-6">
+                        {{ anchor_booking.first_name }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <label>Lastname *</label>
+
+                    </div>
+                    <div class="col-md-6">
+                        {{ anchor_booking.last_name }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <label>Email *</label>
+
+                    </div>
+                    <div class="col-md-6">
+                        {{ anchor_booking.customer_email_id }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <label>Company Name *</label>
+
+                    </div>
+                    <div class="col-md-6">
+                        {{ anchor_booking.company_name }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <label>Mobile Number *</label>
+
+                    </div>
+                    <div class="col-md-6">
+                        {{ anchor_booking.mobile_number }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <label>Phone Number *</label>
+
+                    </div>
+                    <div class="col-md-6">
+                        {{ anchor_booking.phone_number }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <label>Address *</label>
+
+                    </div>
+                    <div class="col-md-6">
+                        {{ anchor_booking.address }}
+                    </div>
+                </div>
+            </div>
+            <span class="customer-details">Event Details</span>
+            <div class="book-now-style">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <label>Event Type *</label>
+
+                    </div>
+                    <div class="col-md-6">
+                        {{ anchor_booking.event_type }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <label>Event Place *</label>
+
+                    </div>
+                    <div class="col-md-6">
+                        {{ anchor_booking.event_place }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <label>Event Venue *</label>
+
+                    </div>
+                    <div class="col-md-6">
+                        {{ anchor_booking.event_venue }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <label>Event Costume *</label>
+
+                    </div>
+                    <div class="col-md-6">
+                        {{ anchor_booking.costume }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <label>Event Briefing *</label>
+
+                    </div>
+                    <div class="col-md-6">
+                        {{ anchor_booking.about_event }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <label>Total Payable amount</label>
+
+                    </div>
+                    <div class="col-md-6">
+                        {{ anchor_booking.total }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" id="rzp-button1"> Pay Now </button>
+    </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var amount = {{ anchor_booking.total }};
+var email = "{{ anchor_booking.customer_email_id }}";
+var options = {
+    "key": "rzp_test_vsLeuiqK7KkwQJ",
+    "amount": amount, // 2000 paise = INR 20
+    "name": "BMA",
+    "description": "Purchase Description",
+    "image": "img/logo.png",
+    "handler": function (response){
+        alert(response.razorpay_payment_id);
+        var params = response.razorpay_payment_id;
+        $.ajax({
+            url: '/booking_completed/' + params + '/' + '{{anchor_booking.id}}/',
+        success:
+					window.location = "{% url 'home' %}",
+        });
+
+    },
+    "prefill": {
+        "name": "",
+        "email": email,
+    },
+    "theme": {
+        "color": "#F37254"
+    }
+};
+var rzp1 = new Razorpay(options);
+
+document.getElementById("rzp-button1").onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+{% endblock %}

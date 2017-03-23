@@ -1,0 +1,265 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block custom_css %}
+		<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+		<script type="text/javascript" src="{% static 'js/bootstrap-slider.js' %}"></script>
+	    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-slider.css' %}">
+	    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+      	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<style type="text/css">
+			@import url('https://fonts.googleapis.com/css?family=Lato:400,900&subset=latin-ext');
+
+			.background_image{
+				background-image: none;
+				background-color: #ffffff !important;
+			}
+			.social-container1{
+				position: fixed;
+				z-index: 1000;
+			}
+			#myCarousel{
+				/*height: 500px;*/
+				width: 100%;
+			}
+			.nav-fltr-text{
+				font-size: 16px;
+				font-family: 'Lato', sans-serif;
+				padding-top: 3px;
+				padding-bottom: 0px;
+			}
+			.form-control{
+				height: 24px;
+				padding: 0px 0px;
+    			font-size: 12px;
+			}
+			.checkbox-grid li{
+				display: block;
+			}
+			.sidenav{
+				background:#e8e7e7;
+
+			}
+			.fit-text{
+				font-family: 'Lato', sans-serif;
+				font-weight: 900; 
+				font-size: 18px; 
+				padding-top: 30px; 
+				padding-bottom: 10px;"
+			}
+			.subfltr-text{
+				/*font-size: 17px; */
+				/*font-family: raleway;*/
+				font-size: 14px; 
+				font-family: 'Lato', sans-serif;
+				letter-spacing: 1px;
+				padding-bottom: 5px;	
+				}
+			.ui-widget-header {
+				background: #269abc;}
+			.ui-widget-content{
+				background: #269abc;}
+			}
+			.checkbox-grid{
+			    padding-left: 0px;
+			}
+			.checkbox-grid li{
+				display: block;
+				float: left;
+				width: 100px;
+			}
+		</style>
+		<!-- Javascript -->
+      <script>
+         $(function() {
+            $( "#slider-3" ).slider({
+               range:true,
+               min: 0,
+               max: 100000,
+               values: [ 5000, 7000 ],
+               slide: function( event, ui ) {
+                  $( "#price1" ).val(ui.values[ 0 ]);
+                  $( "#price2" ).val(ui.values[ 1 ]);
+               }
+           });
+         $( "#price1" ).val($( "#slider-3" ).slider( "values", 0 ));
+         $( "#price2" ).val($( "#slider-3" ).slider( "values", 1 ));
+         });
+
+         $(function() {
+            $( "#slider-4" ).slider({
+               range:true,
+               min: 1,
+               max: 6,
+               values: [ 1, 6 ],
+               slide: function( event, ui ) {
+                  $( "#price3" ).val(ui.values[ 0 ]);
+                  $( "#price4" ).val(ui.values[ 1 ]);
+               }
+           });
+         $( "#price3" ).val($( "#slider-4" ).slider( "values", 0 ));
+         $( "#price4" ).val($( "#slider-4" ).slider( "values", 1 ));
+         });
+      </script>
+{% endblock %}
+
+{% block main_content %}
+<!-- slider -->
+<div class="landingpagebanner">
+	<img src="{% static 'image/landing-page-banner.jpg' %}" class="img-responsive" style="padding-top: 20px;">
+</div>
+<!-- ends slider -->
+<div class="row">
+	<div class="col-md-12" style="padding-top: 5px;">
+		<div class="col-sm-2 sidenav">
+			<form action="landingpage.php?searching" method="post">
+				<p class="text-center fit-text page-header">Filter By</p>
+				<div class="price-container" style="margin-left: 5px;">
+					<h4 class="nav-fltr-text">Price Range</h4>
+					<input type="text" id="price1" name="min_price" class="form-control text-center">
+					<div id="slider-3"></div>
+					<input type="text" id="price2" name="max_price" class="form-control text-center">
+				</div>
+				<div class="subfltr-text">
+					<h4 class="nav-fltr-text" style="margin-left: 5px;">Available</h4>
+					<input type="radio" name="online" style="margin-left: 5px;">Online
+					<input type="radio" name="offline" style="margin-left: 18px;"">Offline
+				</div>
+				<div class="subfltr-text" style="margin-left: 5px;">
+					<h4 class="nav-fltr-text">Performing Members</h4>
+					<input type="text" id="price3" name="min_members" class="form-control text-center">
+					<div id="slider-4"></div>
+					<input type="text" id="price4" name="max_members" class="form-control text-center">
+				</div>
+				<div class="subfltr-text">
+					<h4 class="nav-fltr-text" style="margin-left: 5px;">Gender</h4>
+					<input type="radio" name="male" style="margin-left: 5px;">Male
+					<input type="radio" name="female" style="margin-left: 18px;">Female
+				</div>
+				<div class="subfltr-text">
+					<h4 class="nav-fltr-text" style="margin-left: 5px;">Event Type</h4>
+					<select class="form-control" name="event_type"  style="margin-left: 5px;">
+						event type
+					</select>
+				</div>
+				<div class="subfltr-text">
+					<h4 class="nav-fltr-text" style="margin-left: 5px;">Languages</h4>
+					<ul class="checkbox-grid" style="padding-left: 0px;">
+						<li><input type="checkbox" name="english">English</li>
+						<li><input type="checkbox" name="malayalam">Malayalam</li>
+						<li><input type="checkbox" name="tamil">Tamil</li>
+						<li><input type="checkbox" name="kannada">kannada</li>
+						<li><input type="checkbox" name="punjabi">Punjabi</li>
+						<li><input type="checkbox" name="telugu">Telugu</li>
+						<li style="padding-bottom: 10px;"><input type="checkbox" name="marati">Marathi</li>
+					</ul>
+				</div>
+				<br/>
+				<div class="col-md-12"  style="margin-left: 5px;">
+					<button class="btn btn-primary" type="submit" style="margin-bottom: 10px;">Apply Filter</button>
+				</div>
+			</form>
+		</div>
+		<div class="col-sm-10 real_anchor_tab">
+			<div id="cssmenu">
+				<ul>
+					<li class="active real_anchor"><a class="active real_anchor" href="#">Anchor</a></li>
+					<li class="celebrity-anchor"><a class="celebrity-anchor" href="#">Celebrity Anchor</a></li>
+				</ul>
+			</div>
+			{% for anchor in anchors %}
+			<div class="col-md-6">
+				<div class="profile-outer-container">
+					<div class="profile-content-container container-fluid">
+						<div class="profile-image-container col-md-6">
+							<img src="{% static "" %}{{anchor.image_path}}main.jpg" class="img-responsive">
+						</div>
+						<div class="col-md-6 profile-content-main-outer">
+							<div class="profile-content" style="padding: 6px;">
+								<span class="anchor_name_inner">{{anchor.user.first_name}} {{anchor.user.last_name}}</span>
+								<span class="online">Status</span>
+								<br>
+								<span>
+									{% for type in anchor.type.all %}
+										{{ type.anchor_type }}/
+									{% endfor %}
+								</span>
+								<br>
+								<!--star-->
+								{% for c in anchor.star_rating %}
+								<span class="glyphicon glyphicon-star golden"></span>
+								{% endfor %}
+								<!--end star-->
+								<br>
+								<span class="glyphicon glyphicon-map-marker"></span>
+								<span>{{anchor.place}}</span>
+								<br>
+								<span>BMA Code: </span>
+								<span>{{anchor.bma_code}}</span>
+							</div>
+						</div>
+						<div class="landingpage_buttons_container">
+							<div class="col-md-6 landingpage_buttons">
+								<a href="#">
+									<button class="btn btn-info col-md-12">Check Availability</button>
+								</a>
+							</div>
+							<div class="col-md-6 landingpage_buttons">
+								<a href="{% url 'viewprofile' anchor.id %}">
+									<button class="btn btn-info col-md-12">ViewProfile</button>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="col-sm-10 celebrity-anchor_tab hide">
+			<!-- menu bar starts -->
+			<div id="cssmenu">
+				<ul>
+					<li class="real_anchor"><a class="real_anchor" href="#">Anchor</a></li>
+					<li class="active celebrity-anchor"><a class="active celebrity-anchor" href="#">Celebrity Anchor</a></li>
+				</ul>
+			</div>
+			{% for c_anchor in celebrity_anchor %}
+			<div class="col-md-6">
+				<div class="profile-outer-container">
+					<div class="profile-content-container container-fluid">
+						<div class="profile-image-container col-md-6">
+							<img src="{% static "" %}{{c_anchor.image_path}}main.jpg" class="img-responsive">
+						</div>
+						<div class="col-md-6 profile-content-main-outer">
+							<div class="profile-content">
+								<span class="anchor_name_inner">{{c_anchor.user.first_name}} {{c_anchor.user.last_name}}</span>
+								<br>
+								<span>
+									{% for type in c_anchor.type.all %}
+										{{ type.anchor_type }}/
+									{% endfor %}
+								</span>
+							</div>
+						</div>
+						<div class="landingpage_buttons_container">
+							<div class="col-md-6 landingpage_buttons">
+								<a href="#">
+									<button class="btn btn-info col-md-12">Book Now</button>
+								</a>
+							</div>
+							<div class="col-md-6 landingpage_buttons">
+								<a href="{% url 'viewprofile'  c_anchor.id %}">
+									<button class="btn btn-info col-md-12">ViewProfile</button>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+{% endblock %}

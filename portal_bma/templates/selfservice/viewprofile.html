@@ -1,0 +1,369 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block import_files %}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script type="text/javascript" src="{% static 'js/d/jquery.js' %}"></script>-->
+        <script type="text/javascript" src="{% static 'js/state.js' %}"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<!--<script src="{% static 'js/jquery.swipebox.min.js' %}"></script>-->
+<!--<link rel="stylesheet" href="{% static 'css/swipebox.min.css' %}">-->
+<link rel="stylesheet" href="{% static 'css/blueimp-gallery.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/blueimp-gallery-video.css' %}">
+{% endblock %}
+
+{% block custom_css %}
+        <style type="text/css">
+		#myCarousel{
+			height: 600px;
+			width: 100%;
+		}
+		html{
+			overflow-x: hidden;
+		}
+		body{
+			overflow-x: hidden;
+		}
+		.btn-1{
+			height: 49px;
+			font-family: raleway;
+		}
+		#ui-datepicker-div{
+		    z-index: 10 !important;
+		}
+		.ui-timepicker-container {
+		    z-index: 10 !important;
+		}
+		.error{
+		    background-color: red;
+		    color: #fff;
+		}
+
+		</style>
+        <script type="text/javascript">
+			$(document).ready(function(){
+				$(".close_booking").click(function(e){
+					console.log("close");
+					$(".booking_container").addClass("hide");
+					$(".view-profile-user-deails").removeClass("hide");
+				})
+			});
+		</script>
+        <script>
+            $( function() {
+            $( "#datepicker" ).datepicker();
+            } );
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#timepicker1').timepicker({});
+                $('#timepicker2').timepicker({});
+            });
+        </script>
+{% endblock %}
+
+{% block main_content %}
+<!-- user complete details container -->
+<div class="container-fluid user-details-container">
+    <!-- photo container -->
+    <div class="col-md-6">
+        <!-- name container -->
+        <div class="col-md-12 user-name-container">
+            <span>{{user_profile.user.first_name}} {{user_profile.user.last_name}}</span>
+            <br/>
+            <span class="anchor-category">
+                {% for type in user_profile.type.all %}
+                    {{ type.anchor_type }}/
+                {% endfor %}
+            </span>
+        </div>
+        <!-- ends name container -->
+        <!-- anchor profile image -->
+        <div class="col-md-12">
+            <img src="{% static "" %}{{user_profile.image_path}}main.jpg" class="img-responsive">
+        </div>
+        <!-- ends anchor profile image -->
+    </div>
+    <!-- ends photo container -->
+    <!-- user details entry -->
+    <div class="col-md-6 view-profile-user-deails">
+        <div class="apart-book-now">
+            <!-- menu bar starts -->
+            <div class="view-profile-menu-bar col-md-12">
+                {% if user_profile.is_anchor %}
+                <span><a class="active" id="booking-info">Booking Info</a></span>
+                <span><a  id="biography">Biography</a></span>
+                <span><a  id="photos">Photos</a></span>
+                <span><a  id="videos">Videos</a></span>
+                {% else %}
+                <span><a class="active" id="biography">Biography</a></span>
+                <span><a  id="photos">Photos</a></span>
+                <span><a  id="videos">Videos</a></span>
+                {% endif %}
+                <!-- <span><a  id="clientsandtest">Events&amp;Clients</a></span> -->
+            </div>
+            <!-- ends menu bar -->
+
+            <!-- biography container -->
+            <div class="col-md-12 biography-container {% if user_profile.is_anchor %}hide{% endif %}">
+                <span>Biography</span>
+                <div class="col-md-12 biography-deails">
+                    <span>
+                        {{ user_profile.biography }}
+                    </span>
+                </div>
+            </div>
+            <!-- ends biography container -->
+            {% if user_profile.is_anchor %}
+            <!-- booking info container -->
+            <div class="col-md-12 booking-info-container">
+                <span class="main-title">Booking info</span>
+                <div class="col-md-12 booking-info-deails">
+                    <div class="col-md-12 description-container">
+                        <div class="col-md-6 description-title text-center">
+                            <span>Performing Team</span>
+                        </div>
+                        <div class="col-md-6 sub-text">
+                            <span>
+                                1
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 description-container">
+                        <div class="col-md-6 description-title text-center">
+                            <span>Performing Duration</span>
+                        </div>
+                        <div class="col-md-6 description-details sub-text">
+                            <span>
+                                60Min
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 description-container">
+                        <div class="col-md-6 description-title text-center">
+                            <span>Language Know</span>
+                        </div>
+                        <div class="col-md-6 description-details description-details sub-text">
+                            <span>
+                                {% for language in user_languages %}
+                                    {{language.language}},
+                                {% endfor %}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 description-container">
+                        <div class="col-md-6 description-title text-center">
+                            <span>Event Prefered</span>
+                        </div>
+                        <div class="col-md-6 description-details sub-text">
+                            <span>
+                                {% for type in user_profile.event_preffered.all %}
+                                    {{ type.event_type }}/
+                                {% endfor %}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 description-container">
+                        <div class="col-md-6 description-title text-center">
+                            <span>Open to travel</span>
+                        </div>
+                        <div class="col-md-6 description-details sub-text">
+                            <span>Kerala</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 description-container">
+                        <div class="col-md-6 description-title text-center">
+                            <span>Preffered Place</span>
+                        </div>
+                        <div class="col-md-6 description-details description-details sub-text">
+                            <span>{{ user_profile.preffered_place }}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 description-container">
+                        <div class="col-md-6 description-title text-center">
+                            <span>Fee</span>
+                        </div>
+                        <div class="col-md-6 description-details">
+                            <a id="budget-fix">
+                                <button class="col-md-12 btn btn-info btn-1">Fix Budget</button>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-12 description-container">
+                        <div class="error">
+                            <ul>
+                            {%for error in check_available_form.errors%}
+                                {% if error in "function_end"%}
+                                    <li>Please enter function ending time</li>
+                                {% endif %}
+                                {% if error in "function_start"%}
+                                    <li>Please enter function starting time</li>
+                                {% endif %}
+                                {% if error in "function_date"%}
+                                    <li>Please enter function date</li>
+                                {% endif %}
+                                {% if error in "function_days"%}
+                                    <li>Please enter function for how many days</li>
+                                {% endif %}
+                                {% if error in "function_state"%}
+                                    <li>Please enter state</li>
+                                {% endif %}
+                                {% if error in "function_place"%}
+                                    <li>Please enter place</li>
+                                {% endif %}
+                            {% endfor %}
+                            </ul>
+                        </div>
+                        {% if messages %}
+                            {% for message in messages %}
+                            <div>
+                                {{message}}
+                            </div>
+                            {% endfor %}
+                        {% endif %}
+                        {% if "amount" in message %}
+                        <script>
+                            $(document).ready(function(){
+                                $('.booking-form').addClass('hide');
+                            });
+                        </script>
+                        <div class="col-md-12">
+                            <a href="/{{anchor_booking.id}}/booking/{{user_profile.id}}">
+                                <button type="submit" class="btn btn-primary col-md-12">Book Now</button>
+                            </a>
+                        </div>
+                        {% else %}
+                        <script>
+                            $(document).ready(function(){
+                                $('.booking-form').removeClass('hide');
+                            });
+                        </script>
+                        {% endif %}
+                        <form role="form" class="booking-form" action="/view_profile/{{user_profile.id}}/" method="post">
+                            {% csrf_token %}
+                            <label class="control-label" for="function_date">Function Date</label>
+                            {{check_available_form.function_date}}
+                            <label class="control-label" for="function_start">Function Starting Time</label>
+                            <div class="input-group bootstrap-timepicker timepicker">
+                                {{check_available_form.function_start}}
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                            </div>
+                            <label class="control-label" for="function_end">Function Ending Time</label>
+                            <div class="input-group bootstrap-timepicker timepicker">
+                                {{check_available_form.function_end}}
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                            </div>
+                            <label class="control-label" for="function_days">How Many Days</label>
+                            {{check_available_form.function_days}}
+                            <label class="control-label" for="function_state">State</label>
+                            <div id="selection">
+                                {{check_available_form.function_state}}
+                                <label class="control-label" for="function_place">Place</label>
+                                {{check_available_form.function_place}}
+                            </div>
+                            <br>
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary col-md-12">Fix Budget</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- ends booking-info container -->
+            {% endif %}
+            <!-- photos container -->
+            <div class="photos-container hide col-md-12">
+                <span class="main-title">Photos</span>
+                <div class="col-md-12 container-fluid">
+                    <div id="links">
+                        {% for c in image_count%}
+                        <div class="col-md-4 photo-outer-container">
+                            <div class="photos_indi_container">
+                                <a href="{% static "" %}{{user_profile.image_path}}{{c}}.jpg" title="{{user_profile.user.first_name}} {{user_profile.user.last_name}}">
+                                    <img src="{% static "" %}{{user_profile.image_path}}{{c}}.jpg" alt="{{user_profile.user.first_name}} {{user_profile.user.last_name}}" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- ends photos container -->
+            <!-- video container -->
+            <div class="video-container hide col-md-12">
+                <span class="main-title">Videos</span>
+                <div class="col-md-12 container-fluid">
+                    <div id="links_video">
+                        {% for c in anchor_video%}
+                        <div class="col-md-4 photo-outer-container">
+                            <div class="photos_indi_container">
+                                <a href="https://www.youtube.com/watch?v={{c.video_id}}" title="LES TWINS - An Industry Ahead" type="text/html" data-youtube="{{c.video_id}}" poster="http://img.youtube.com/vi/{{c.video_id}}/0.jpg">
+                                    <img src="http://img.youtube.com/vi/{{c.video_id}}/0.jpg" class="img-responsive">
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                 </div>
+            </div>
+            <!-- testmonial -->
+            <div class="testmonial hide col-md-12">
+                <span class="main-title">Events &amp; Clients</span>
+                <div class="col-md-12 container-fluid">
+                    Will be updated soon
+                </div>
+            </div>
+            <!-- ends testmonial -->
+        </div>
+    </div>
+			<!-- ends user complete details container -->
+</div>
+<!-- ends user details entry -->
+{% endblock %}
+
+{% block image_slider %}
+<div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="close">×</a>
+    <a class="play-pause"></a>
+    <ol class="indicator"></ol>
+</div>
+<div id="blueimp-video-carousel" class="blueimp-gallery blueimp-gallery-controls blueimp-gallery-carousel">
+    <div class="slides"></div>
+    <h3 class="title"></h3>
+    <a class="prev">‹</a>
+    <a class="next">›</a>
+    <a class="play-pause"></a>
+</div>
+<script src="{% static 'js/blueimp-gallery.min.js' %}"></script>
+<script src="{% static 'js/blueimp-gallery-youtube.js' %}"></script>
+<script>
+document.getElementById('links').onclick = function (event) {
+    event = event || window.event;
+    var target = event.target || event.srcElement,
+        link = target.src ? target.parentNode : target,
+        options = {index: link, event: event},
+        links = this.getElementsByTagName('a');
+    blueimp.Gallery(links, options);
+};
+document.getElementById('links_video').onclick = function (event) {
+    event = event || window.event;
+    var target = event.target || event.srcElement,
+        link = target.src ? target.parentNode : target,
+        options = {index: link, event: event},
+        links = this.getElementsByTagName('a');
+    blueimp.Gallery(links, options);
+};
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+{% endblock %}
